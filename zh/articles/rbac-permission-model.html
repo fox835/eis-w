@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>企业系统 RBAC 权限模型 - eis-w.com</title>
+<meta name="description" content="设计扛得住真实组织复杂度的 RBAC：用户-角色-权限、角色爆炸、数据范围这第四维，以及在每一层落实校验。">
+<link rel="canonical" href="https://eis-w.com/zh/articles/rbac-permission-model.html">
+<link rel="alternate" hreflang="en" href="https://eis-w.com/articles/rbac-permission-model.html">
+<link rel="alternate" hreflang="zh-CN" href="https://eis-w.com/zh/articles/rbac-permission-model.html">
+<link rel="alternate" hreflang="x-default" href="https://eis-w.com/articles/rbac-permission-model.html">
+<meta property="og:title" content="企业系统 RBAC 权限模型 - eis-w.com">
+<meta property="og:description" content="设计扛得住真实组织复杂度的 RBAC：用户-角色-权限、角色爆炸、数据范围这第四维，以及在每一层落实校验。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://eis-w.com/zh/articles/rbac-permission-model.html">
+<meta property="og:locale" content="zh_CN">
+<meta name="twitter:card" content="summary">
+<link rel="stylesheet" href="/css/style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "企业系统 RBAC 权限模型",
+  "description": "设计扛得住真实组织复杂度的 RBAC：用户-角色-权限、角色爆炸、数据范围这第四维，以及在每一层落实校验。",
+  "datePublished": "2026-10-04",
+  "dateModified": "2026-10-04",
+  "author": { "@type": "Organization", "name": "eis-w.com" },
+  "mainEntityOfPage": "https://eis-w.com/zh/articles/rbac-permission-model.html",
+  "inLanguage": "zh-CN"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "首页", "item": "https://eis-w.com/zh/" },
+    { "@type": "ListItem", "position": 2, "name": "安全与权限", "item": "https://eis-w.com/zh/articles/security/" },
+    { "@type": "ListItem", "position": 3, "name": "企业系统 RBAC 权限模型", "item": "https://eis-w.com/zh/articles/rbac-permission-model.html" }
+  ]
+}
+</script>
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="logo" href="/zh/">EIS-W<span>.com</span></a>
+    <input type="checkbox" id="nav-toggle" class="nav-toggle">
+    <label for="nav-toggle" class="nav-burger" aria-label="打开菜单"><span></span></label>
+    <nav class="site-nav">
+      <a href="/zh/">首页</a>
+      <a href="/zh/articles/">全部文章</a>
+      <a href="/zh/articles/portal/">门户协同</a>
+      <a href="/zh/articles/master-data/">主数据</a>
+      <a href="/zh/articles/document/">文档知识</a>
+      <a href="/zh/articles/process/">流程BPM</a>
+      <a href="/zh/articles/integration/">数据集成</a>
+      <a href="/zh/articles/security/">安全权限</a>
+      <a href="/zh/about.html">关于</a>
+      <a class="lang-switch" href="/articles/rbac-permission-model.html" hreflang="en">English</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap">
+<nav class="breadcrumb" aria-label="面包屑">
+  <ol>
+    <li><a href="/zh/">首页</a></li>
+    <li><a href="/zh/articles/security/">安全与权限</a></li>
+    <li>企业系统 RBAC 权限模型</li>
+  </ol>
+</nav>
+</div>
+
+<div class="wrap layout">
+<aside class="sidebar">
+  <h3>内容栏目</h3>
+  <ul>
+    <li><a href="/zh/articles/portal/">门户与协同</a></li>
+    <li><a href="/zh/articles/master-data/">主数据管理</a></li>
+    <li><a href="/zh/articles/document/">文档与知识</a></li>
+    <li><a href="/zh/articles/process/">流程与 BPM</a></li>
+    <li><a href="/zh/articles/integration/">数据集成</a></li>
+    <li><a href="/zh/articles/security/">安全与权限</a></li>
+    <li><a href="/zh/articles/">全部文章</a></li>
+  </ul>
+  <h3>热门文章</h3>
+  <ul>
+    <li><a href="/zh/articles/unified-enterprise-portal.html">构建统一企业信息门户</a></li>
+    <li><a href="/zh/articles/master-data-governance.html">主数据治理：打造唯一事实源</a></li>
+    <li><a href="/zh/articles/document-knowledge-base.html">企业文档与知识库设计</a></li>
+  </ul>
+  <h3>关于</h3>
+  <ul>
+    <li><a href="/zh/about.html">关于本站</a></li>
+  </ul>
+</aside>
+
+<main class="content">
+  <article class="article">
+    <h1>企业系统 RBAC 权限模型</h1>
+    <p class="article-meta">发布时间：2026-10-04 | 分类：安全与权限</p>
+
+    <p>"谁能看到工资列？"在成熟的系统里，这个问题的答案是一份报表，而不是一次会议。<strong>基于角色的访问控制（RBAC）</strong>——把用户归入角色、把权限授予角色——是标准答案，在组织架构长出獠牙之前一直美好。本文讲经典模型，以及它在真实企业里通常裂开的三个地方。</p>
+
+    <h2>把经典模型做对</h2>
+
+    <p>RBAC 分三层：用户获得<strong>角色</strong>；角色携带<strong>权限</strong>；权限命名<strong>对资源的动作</strong>——对"销售订单""工资报表"的"读""审批""删除"。两条规则保持它干净：权限绝不直接授予用户，只经由角色；权限要细粒度（"审批销售订单"）而非页面级（"能进订单页面"），于是一个角色可以组合多个权限，而不必每页一个新角色。用户的权限恰好是其所有角色权限的并集——永不手工越权。</p>
+
+    <h2>裂口一：角色爆炸</h2>
+
+    <p>"华东销售经理""华西销售经理""试用期初级华东销售经理"——组织发明角色的速度超过 IT 建模的速度。解法是<strong>层级加约束</strong>：一小撮基础角色（销售、经理），叠加一个<strong>数据范围</strong>（华东、华西）而不是烘进角色名，再加<strong>互斥规则</strong>（同一用户不能同时是同流程的"申请人"与"审批人"）。三种机制替代数百个近重复角色。</p>
+
+    <h2>裂口二：数据范围是被遗忘的维度</h2>
+
+    <p>"销售经理"只说了职能，哪些行呢？经理只看本区的订单，HR 只看本部门的工资。这就是<strong>数据范围</strong>，它以两种方式失败：逐条查询硬编码（脆弱、不一致），或只活在前端（直连 API 即可绕过）。正确的位置是在数据访问层统一施加的范围过滤，由用户角色属性推导，并像安全代码一样测试——因为它就是。</p>
+
+    <h2>裂口三：校验落在错误的层</h2>
+
+    <p>藏起按钮不是安全。每一层都必须校验：</p>
+
+    <ul>
+      <li><strong>界面层</strong>——藏起用户不能做的操作（体验好，安全为零）</li>
+      <li><strong>API 网关</strong>——拒绝未认证与未授权调用</li>
+      <li><strong>服务层</strong>——校验该动作的具体权限</li>
+      <li><strong>数据层</strong>——对每条查询施加数据范围过滤</li>
+    </ul>
+
+    <p>任何一层缺失，其上各层都只是装饰。<a href="/zh/articles/unified-enterprise-portal.html">统一门户</a>从同一角色模型渲染菜单，用户看见的就是他能做的。</p>
+
+    <h2>审计与定期复核</h2>
+
+    <p>没有复核的权限模型会悄悄腐烂。记录每一次授权、每一次角色变更、每一次"被拒后重试"的访问模式。每季度复核角色指派——人积角色如 lint，两个项目前那笔"临时"权限至今还在。角色变更要对接人事事件：调岗发生时旧角色应自动终止，而不是等谁想起来。</p>
+
+    <h2>默认拒绝，例外留痕</h2>
+
+    <p>对新的权限请求，默认答案应是否定的；要翻转，须留下书面的业务理由。例外授权要到期：给每个一次性访问设结束日期，由系统自动收回。多年下来，仅此一个习惯——默认拒绝、例外到期——对最小权限的贡献超过任何制度文档，因为它把权限增长从"不断累积"变成了"刻意且可复核的决定"。</p>
+
+    <h2>结语</h2>
+
+    <p>RBAC 要在企业现实里活下来，就要保持权限细粒度、把数据范围建模为一等维度、在每层落实校验、按日程复核。安全是报表而非会议，并不更没人情味——它只是唯一能扩展的那种。身份与权限定了，消费它们的系统——门户、文档、流程——都继承同一套保证。</p>
+
+    <nav class="article-nav">
+      <a href="/zh/articles/data-integration-patterns.html">&larr; 上一篇：企业系统数据集成模式</a>
+      <span></span>
+    </nav>
+  </article>
+</main>
+</div>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <h4>EIS-W.com</h4>
+        <p>企业信息系统技术站：门户、主数据、文档、流程、集成与安全。联系邮箱：<a href="mailto:webnic@qq.com">webnic@qq.com</a></p>
+      </div>
+      <div>
+        <h4>栏目导航</h4>
+        <ul>
+          <li><a href="/zh/articles/portal/">门户与协同</a></li>
+          <li><a href="/zh/articles/master-data/">主数据管理</a></li>
+          <li><a href="/zh/articles/document/">文档与知识</a></li>
+          <li><a href="/zh/articles/process/">流程与 BPM</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>相关站点</h4>
+        <ul>
+          <li><a href="https://jxc.js.cn" rel="noopener">jxc.js.cn · 进销存技术</a></li>
+          <li><a href="https://psi.js.cn" rel="noopener">psi.js.cn · PSI 进销存</a></li>
+          <li><a href="https://ims.js.cn" rel="noopener">ims.js.cn · 信息管理</a></li>
+          <li><a href="https://jxc-w.com" rel="noopener">jxc-w.com · 进销存 Web 版</a></li>
+          <li><a href="https://erp-w.com" rel="noopener">erp-w.com · ERP Web 版</a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="copyright">© 2026 eis-w.com · 企业信息系统技术站</p>
+  </div>
+</footer>
+
+</body>
+</html>

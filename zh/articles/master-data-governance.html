@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>主数据治理：打造唯一事实源 - eis-w.com</title>
+<meta name="description" content="让客户、供应商、物料与组织主数据持续可信的治理规则：唯一写入路径、数据管家、质量指标与分发机制。">
+<link rel="canonical" href="https://eis-w.com/zh/articles/master-data-governance.html">
+<link rel="alternate" hreflang="en" href="https://eis-w.com/articles/master-data-governance.html">
+<link rel="alternate" hreflang="zh-CN" href="https://eis-w.com/zh/articles/master-data-governance.html">
+<link rel="alternate" hreflang="x-default" href="https://eis-w.com/articles/master-data-governance.html">
+<meta property="og:title" content="主数据治理：打造唯一事实源 - eis-w.com">
+<meta property="og:description" content="让客户、供应商、物料与组织主数据持续可信的治理规则：唯一写入路径、数据管家、质量指标与分发机制。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://eis-w.com/zh/articles/master-data-governance.html">
+<meta property="og:locale" content="zh_CN">
+<meta name="twitter:card" content="summary">
+<link rel="stylesheet" href="/css/style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "主数据治理：打造唯一事实源",
+  "description": "让客户、供应商、物料与组织主数据持续可信的治理规则：唯一写入路径、数据管家、质量指标与分发机制。",
+  "datePublished": "2026-10-04",
+  "dateModified": "2026-10-04",
+  "author": { "@type": "Organization", "name": "eis-w.com" },
+  "mainEntityOfPage": "https://eis-w.com/zh/articles/master-data-governance.html",
+  "inLanguage": "zh-CN"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "首页", "item": "https://eis-w.com/zh/" },
+    { "@type": "ListItem", "position": 2, "name": "主数据管理", "item": "https://eis-w.com/zh/articles/master-data/" },
+    { "@type": "ListItem", "position": 3, "name": "主数据治理：打造唯一事实源", "item": "https://eis-w.com/zh/articles/master-data-governance.html" }
+  ]
+}
+</script>
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="logo" href="/zh/">EIS-W<span>.com</span></a>
+    <input type="checkbox" id="nav-toggle" class="nav-toggle">
+    <label for="nav-toggle" class="nav-burger" aria-label="打开菜单"><span></span></label>
+    <nav class="site-nav">
+      <a href="/zh/">首页</a>
+      <a href="/zh/articles/">全部文章</a>
+      <a href="/zh/articles/portal/">门户协同</a>
+      <a href="/zh/articles/master-data/">主数据</a>
+      <a href="/zh/articles/document/">文档知识</a>
+      <a href="/zh/articles/process/">流程BPM</a>
+      <a href="/zh/articles/integration/">数据集成</a>
+      <a href="/zh/articles/security/">安全权限</a>
+      <a href="/zh/about.html">关于</a>
+      <a class="lang-switch" href="/articles/master-data-governance.html" hreflang="en">English</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap">
+<nav class="breadcrumb" aria-label="面包屑">
+  <ol>
+    <li><a href="/zh/">首页</a></li>
+    <li><a href="/zh/articles/master-data/">主数据管理</a></li>
+    <li>主数据治理：打造唯一事实源</li>
+  </ol>
+</nav>
+</div>
+
+<div class="wrap layout">
+<aside class="sidebar">
+  <h3>内容栏目</h3>
+  <ul>
+    <li><a href="/zh/articles/portal/">门户与协同</a></li>
+    <li><a href="/zh/articles/master-data/">主数据管理</a></li>
+    <li><a href="/zh/articles/document/">文档与知识</a></li>
+    <li><a href="/zh/articles/process/">流程与 BPM</a></li>
+    <li><a href="/zh/articles/integration/">数据集成</a></li>
+    <li><a href="/zh/articles/security/">安全与权限</a></li>
+    <li><a href="/zh/articles/">全部文章</a></li>
+  </ul>
+  <h3>热门文章</h3>
+  <ul>
+    <li><a href="/zh/articles/unified-enterprise-portal.html">构建统一企业信息门户</a></li>
+    <li><a href="/zh/articles/master-data-governance.html">主数据治理：打造唯一事实源</a></li>
+    <li><a href="/zh/articles/document-knowledge-base.html">企业文档与知识库设计</a></li>
+  </ul>
+  <h3>关于</h3>
+  <ul>
+    <li><a href="/zh/about.html">关于本站</a></li>
+  </ul>
+</aside>
+
+<main class="content">
+  <article class="article">
+    <h1>主数据治理：打造唯一事实源</h1>
+    <p class="article-meta">发布时间：2026-10-04 | 分类：主数据管理</p>
+
+    <p>让两个部门各自导出一份"客户清单"，你会得到两份不同的答案。同一个客户以略有差异的名字出现三次；一个供应商有两个编码；一半物料没有计量单位。这就是主数据问题，它在 quietly 腐蚀其上构建的每一份报表、每一个价格和每一次发货。<strong>主数据治理</strong>就是让共享参考数据保持正确、完整、无歧义的纪律——一个所有系统都能信任的唯一事实源。</p>
+
+    <h2>什么算主数据</h2>
+
+    <p>主数据是被各类交易引用、相对稳定的核心数据：客户、供应商、物料、组织、员工、仓库、会计科目。它变化慢、被多系统读取、且被到处复制。这个组合——慢变化、广读取、频繁复制——正是它腐烂的原因：没人拥有它，于是人人都按自己的需要改它。</p>
+
+    <h2>规则一：唯一写入路径</h2>
+
+    <p>最有效的一条规则：每类主实体有且只有一个权威系统、一条创建与修改路径。客户主数据只在 CRM 创建，物料只在 ERP 创建，组织架构只在人事系统维护。其他系统只接收只读副本。第二个系统一旦获得写权限，数据分化就不可避免，对账会成为长期的税。如果业务确实需要两个创建点，就在前面架一个注册服务，由它发放规范 ID。</p>
+
+    <h2>规则二：每个域一名数据管家</h2>
+
+    <p>技术无法判断"ABC 有限公司"和"ABC 公司"是不是同一家。为每个域——客户、供应商、物料、组织——指定一名人类<strong>管家</strong>，赋予其批准合并、拒绝重复、制定命名规范的权力和工具。管家制应由每天真正使用这些数据的人兼任，而不是遥远的数据部门职能。</p>
+
+    <h2>规则三：把质量变成可测指标</h2>
+
+    <p>"提升数据质量"无法落地，仪表盘可以。选几个维度按月度量：</p>
+
+    <ul>
+      <li><strong>完整性</strong>——多少比例的客户有税号、真实地址、归属负责人？</li>
+      <li><strong>唯一性</strong>——模糊匹配每千条记录能发现多少近重复？</li>
+      <li><strong>一致性</strong>——ERP、CRM 和门户对同一 ID 的属性值是否一致？</li>
+      <li><strong>及时性</strong>——一次修正要花多久才能送达所有下游副本？</li>
+    </ul>
+
+    <p>把数字贴在管家看得见的地方。被度量的事项才拿得到预算。</p>
+
+    <h2>规则四：受控分发</h2>
+
+    <p>副本无法避免，那就让所有副本只走一条受控通道：属主系统发布变更事件或定时快照，下游系统订阅且永不回写。按各消费方的时效需求选<a href="/zh/articles/data-integration-patterns.html">合适的集成模式</a>——毫秒级用事件，隔夜用批量。每个副本都带规范 ID，对账是联表查询，而不是侦探故事。</p>
+
+    <h2>绕不过去的迁移期</h2>
+
+    <p>建在脏主数据之上的治理，结果就是脏的。规则上线前要留出明确的迁移期：合并明显重复、回填关键字段、清退指向空处的编码。这段工作不性感，体量也常超预期，但它决定了治理是立得住，还是一年内被悄悄放弃。</p>
+
+    <p>顺序本身并不重要，重要的是坚持：每条规则都因其他规则存在才成立。有唯一写入通道却没有管家，会变成瓶颈；有指标却没有分发通道，会变成琐事；有分发却没有质量门禁，只是把坏数据副本整理得很整齐。</p>
+
+    <h2>结语</h2>
+
+    <p>主数据治理不是一次性的清洗，而是一组长期有效的规则：唯一写入路径、实名管家、可测质量、受控分发。这四条到位，之后每一份下游报表都不再需要讨价还价。门户、文档、流程都要消费主数据，所以治理还是一个安静的前提——它支撑起<a href="/zh/articles/document-knowledge-base.html">可以信赖的文档与知识库</a>。</p>
+
+    <nav class="article-nav">
+      <a href="/zh/articles/unified-enterprise-portal.html">&larr; 上一篇：构建统一企业信息门户</a>
+      <a href="/zh/articles/document-knowledge-base.html">下一篇：企业文档与知识库设计 &rarr;</a>
+    </nav>
+  </article>
+</main>
+</div>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <h4>EIS-W.com</h4>
+        <p>企业信息系统技术站：门户、主数据、文档、流程、集成与安全。联系邮箱：<a href="mailto:webnic@qq.com">webnic@qq.com</a></p>
+      </div>
+      <div>
+        <h4>栏目导航</h4>
+        <ul>
+          <li><a href="/zh/articles/portal/">门户与协同</a></li>
+          <li><a href="/zh/articles/master-data/">主数据管理</a></li>
+          <li><a href="/zh/articles/document/">文档与知识</a></li>
+          <li><a href="/zh/articles/process/">流程与 BPM</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>相关站点</h4>
+        <ul>
+          <li><a href="https://jxc.js.cn" rel="noopener">jxc.js.cn · 进销存技术</a></li>
+          <li><a href="https://psi.js.cn" rel="noopener">psi.js.cn · PSI 进销存</a></li>
+          <li><a href="https://ims.js.cn" rel="noopener">ims.js.cn · 信息管理</a></li>
+          <li><a href="https://jxc-w.com" rel="noopener">jxc-w.com · 进销存 Web 版</a></li>
+          <li><a href="https://erp-w.com" rel="noopener">erp-w.com · ERP Web 版</a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="copyright">© 2026 eis-w.com · 企业信息系统技术站</p>
+  </div>
+</footer>
+
+</body>
+</html>

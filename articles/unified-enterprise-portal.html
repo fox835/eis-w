@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Building a Unified Enterprise Portal - eis-w.com</title>
+<meta name="description" content="Why a unified portal beats ten standalone systems, and the practical path to consolidate login, menu, message center and search without a big-bang rewrite.">
+<link rel="canonical" href="https://eis-w.com/articles/unified-enterprise-portal.html">
+<link rel="alternate" hreflang="en" href="https://eis-w.com/articles/unified-enterprise-portal.html">
+<link rel="alternate" hreflang="zh-CN" href="https://eis-w.com/zh/articles/unified-enterprise-portal.html">
+<link rel="alternate" hreflang="x-default" href="https://eis-w.com/articles/unified-enterprise-portal.html">
+<meta property="og:title" content="Building a Unified Enterprise Portal - eis-w.com">
+<meta property="og:description" content="Why a unified portal beats ten standalone systems, and the practical path to consolidate login, menu, message center and search without a big-bang rewrite.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://eis-w.com/articles/unified-enterprise-portal.html">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary">
+<link rel="stylesheet" href="/css/style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Building a Unified Enterprise Portal",
+  "description": "Why a unified portal beats ten standalone systems, and the practical path to consolidate login, menu, message center and search without a big-bang rewrite.",
+  "datePublished": "2026-10-04",
+  "dateModified": "2026-10-04",
+  "author": { "@type": "Organization", "name": "eis-w.com" },
+  "mainEntityOfPage": "https://eis-w.com/articles/unified-enterprise-portal.html",
+  "inLanguage": "en"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://eis-w.com/" },
+    { "@type": "ListItem", "position": 2, "name": "Portal & Collaboration", "item": "https://eis-w.com/articles/portal/" },
+    { "@type": "ListItem", "position": 3, "name": "Building a Unified Enterprise Portal", "item": "https://eis-w.com/articles/unified-enterprise-portal.html" }
+  ]
+}
+</script>
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="logo" href="/">EIS-W<span>.com</span></a>
+    <input type="checkbox" id="nav-toggle" class="nav-toggle">
+    <label for="nav-toggle" class="nav-burger" aria-label="Open menu"><span></span></label>
+    <nav class="site-nav">
+      <a href="/">Home</a>
+      <a href="/articles/">Articles</a>
+      <a href="/articles/portal/">Portal</a>
+      <a href="/articles/master-data/">Master Data</a>
+      <a href="/articles/document/">Documents</a>
+      <a href="/articles/process/">Process</a>
+      <a href="/articles/integration/">Integration</a>
+      <a href="/articles/security/">Security</a>
+      <a href="/about.html">About</a>
+      <a class="lang-switch" href="/zh/articles/unified-enterprise-portal.html" hreflang="zh-CN">中文</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap">
+<nav class="breadcrumb" aria-label="Breadcrumb">
+  <ol>
+    <li><a href="/">Home</a></li>
+    <li><a href="/articles/portal/">Portal & Collaboration</a></li>
+    <li>Building a Unified Enterprise Portal</li>
+  </ol>
+</nav>
+</div>
+
+<div class="wrap layout">
+<aside class="sidebar">
+  <h3>Sections</h3>
+  <ul>
+    <li><a href="/articles/portal/">Portal & Collaboration</a></li>
+    <li><a href="/articles/master-data/">Master Data</a></li>
+    <li><a href="/articles/document/">Document & Knowledge</a></li>
+    <li><a href="/articles/process/">Process & BPM</a></li>
+    <li><a href="/articles/integration/">Data Integration</a></li>
+    <li><a href="/articles/security/">Security & Permissions</a></li>
+    <li><a href="/articles/">All Articles</a></li>
+  </ul>
+  <h3>Popular</h3>
+  <ul>
+    <li><a href="/articles/unified-enterprise-portal.html">Building a Unified Enterprise Portal</a></li>
+    <li><a href="/articles/master-data-governance.html">Master Data Governance: One Version of the Truth</a></li>
+    <li><a href="/articles/document-knowledge-base.html">Designing an Enterprise Document and Knowledge Base</a></li>
+  </ul>
+  <h3>About</h3>
+  <ul>
+    <li><a href="/about.html">About This Site</a></li>
+  </ul>
+</aside>
+
+<main class="content">
+  <article class="article">
+    <h1>Building a Unified Enterprise Portal</h1>
+    <p class="article-meta">Published: 2026-10-04 | Category: Portal & Collaboration</p>
+
+    <p>Walk into any mid-size company and count the systems an employee touches before lunch: email, an ERP, a CRM, an HR self-service page, a project tracker, a BI dashboard, plus at least three spreadsheets that officially "do not exist". Each has its own login, its own menu, its own way of saying "you have a task". A <strong>unified enterprise portal</strong> is the single front door that replaces this noise with one entry point — and it is one of the highest-ROI projects an IT department can run.</p>
+
+    <h2>Why ten systems feel like one hundred</h2>
+
+    <p>The pain is not the number of systems; it is the repetition. Users log in five times, learn five menus, and check five places for messages. IT answers five helpdesks, manages five password policies and trains new hires five times for the same action. Every standalone system also invents its own idea of "who am I", so an employee who changes department waits a week for access in one tool while keeping stale rights in another. The cost is invisible in any single budget line and obvious in aggregate productivity.</p>
+
+    <h2>What the portal actually is</h2>
+
+    <p>A portal is not another system to buy. It is a thin shell with four responsibilities:</p>
+
+    <ul>
+      <li><strong>Single sign-on.</strong> One identity, one login, one session for every connected system. This alone removes most daily friction.</li>
+      <li><strong>Unified menu.</strong> One navigation tree, built from each system's menu and filtered by the user's permissions, so a feature lives in exactly one place no matter which backend serves it.</li>
+      <li><strong>Message center.</strong> One inbox for tasks, approvals and alerts pushed from all systems, each deep-linking to the source. Approvals stop hiding in email.</li>
+      <li><strong>Universal search.</strong> One search box over documents, master data and records across systems, respecting permissions on every result.</li>
+    </ul>
+
+    <p>The portal never re-implements the business functions; it frames them. The ERP still posts invoices, the CRM still tracks deals. The portal just makes them feel like one system.</p>
+
+    <h2>Integration without a big-bang rewrite</h2>
+
+    <p>The pragmatic path integrates one layer at a time, oldest pain first:</p>
+
+    <ol>
+      <li><strong>SSO first.</strong> Put all existing systems behind one identity provider with standard protocols (OIDC/SAML). Users feel the win immediately; nothing else changes.</li>
+      <li><strong>Then the menu.</strong> Have each system expose its menu and entry URLs through a small API or config file; the portal renders the tree and filters by role. This is where <a href="/articles/rbac-permission-model.html">a solid RBAC model</a> starts paying off.</li>
+      <li><strong>Then the message center.</strong> Systems push task and alert events to a queue; the portal renders one inbox. Approval workflows from <a href="/articles/bpmn-process-practice.html">your BPM engine</a> surface here as first-class items.</li>
+      <li><strong>Search last.</strong> Index documents and master data first (biggest value), then transactional records. Respect row-level permissions in the index or you will leak data.</li>
+    </ol>
+
+    <h2>The pitfalls that sink portals</h2>
+
+    <ul>
+      <li><strong>Rebuilding instead of framing.</strong> The moment the portal re-implements business logic, you own two systems forever. Resist it.</li>
+      <li><strong>Stale menus.</strong> If adding a feature in the ERP does not automatically update the portal menu, navigation rots within a quarter. Automate the sync.</li>
+      <li><strong>Search without permissions.</strong> A single leaked document in search results destroys trust in the whole portal faster than any missing feature.</li>
+      <li><strong>Treating it as an IT-only project.</strong> The portal is the company's front door; it needs an owner, a roadmap and a budget line like any product.</li>
+    </ul>
+
+    <h2>Conclusion</h2>
+
+    <p>A unified portal succeeds by subtraction: fewer logins, fewer menus, fewer inboxes, fewer places to look. Integrate SSO first, frame the systems you already have, and let the portal earn its keep as the front door. Once the entry point is unified, the next hard problem is the data those systems disagree on — which is exactly what <a href="/articles/master-data-governance.html">master data governance</a> is for.</p>
+
+    <nav class="article-nav">
+      <span></span>
+      <a href="/articles/master-data-governance.html">Next: Master Data Governance: One Version of the Truth &rarr;</a>
+    </nav>
+  </article>
+</main>
+</div>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <h4>EIS-W.com</h4>
+        <p>Enterprise information system technology: portal, master data, documents, process, integration and security. Contact: <a href="mailto:webnic@qq.com">webnic@qq.com</a></p>
+      </div>
+      <div>
+        <h4>Sections</h4>
+        <ul>
+          <li><a href="/articles/portal/">Portal & Collaboration</a></li>
+          <li><a href="/articles/master-data/">Master Data</a></li>
+          <li><a href="/articles/document/">Document & Knowledge</a></li>
+          <li><a href="/articles/process/">Process & BPM</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Related Sites</h4>
+        <ul>
+          <li><a href="https://jxc.js.cn" rel="noopener">jxc.js.cn · Inventory Tech</a></li>
+          <li><a href="https://psi.js.cn" rel="noopener">psi.js.cn · PSI System</a></li>
+          <li><a href="https://ims.js.cn" rel="noopener">ims.js.cn · IMS Tech</a></li>
+          <li><a href="https://jxc-w.com" rel="noopener">jxc-w.com · Web Inventory</a></li>
+          <li><a href="https://erp-w.com" rel="noopener">erp-w.com · ERP Web</a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="copyright">© 2026 eis-w.com · Enterprise Information System Technology Hub</p>
+  </div>
+</footer>
+
+</body>
+</html>

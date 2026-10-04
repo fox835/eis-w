@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>构建统一企业信息门户 - eis-w.com</title>
+<meta name="description" content="为什么统一门户胜过十个孤立系统，以及如何不做大爆炸重写，就整合好登录、菜单、消息中心与统一搜索。">
+<link rel="canonical" href="https://eis-w.com/zh/articles/unified-enterprise-portal.html">
+<link rel="alternate" hreflang="en" href="https://eis-w.com/articles/unified-enterprise-portal.html">
+<link rel="alternate" hreflang="zh-CN" href="https://eis-w.com/zh/articles/unified-enterprise-portal.html">
+<link rel="alternate" hreflang="x-default" href="https://eis-w.com/articles/unified-enterprise-portal.html">
+<meta property="og:title" content="构建统一企业信息门户 - eis-w.com">
+<meta property="og:description" content="为什么统一门户胜过十个孤立系统，以及如何不做大爆炸重写，就整合好登录、菜单、消息中心与统一搜索。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://eis-w.com/zh/articles/unified-enterprise-portal.html">
+<meta property="og:locale" content="zh_CN">
+<meta name="twitter:card" content="summary">
+<link rel="stylesheet" href="/css/style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "构建统一企业信息门户",
+  "description": "为什么统一门户胜过十个孤立系统，以及如何不做大爆炸重写，就整合好登录、菜单、消息中心与统一搜索。",
+  "datePublished": "2026-10-04",
+  "dateModified": "2026-10-04",
+  "author": { "@type": "Organization", "name": "eis-w.com" },
+  "mainEntityOfPage": "https://eis-w.com/zh/articles/unified-enterprise-portal.html",
+  "inLanguage": "zh-CN"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "首页", "item": "https://eis-w.com/zh/" },
+    { "@type": "ListItem", "position": 2, "name": "门户与协同", "item": "https://eis-w.com/zh/articles/portal/" },
+    { "@type": "ListItem", "position": 3, "name": "构建统一企业信息门户", "item": "https://eis-w.com/zh/articles/unified-enterprise-portal.html" }
+  ]
+}
+</script>
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="logo" href="/zh/">EIS-W<span>.com</span></a>
+    <input type="checkbox" id="nav-toggle" class="nav-toggle">
+    <label for="nav-toggle" class="nav-burger" aria-label="打开菜单"><span></span></label>
+    <nav class="site-nav">
+      <a href="/zh/">首页</a>
+      <a href="/zh/articles/">全部文章</a>
+      <a href="/zh/articles/portal/">门户协同</a>
+      <a href="/zh/articles/master-data/">主数据</a>
+      <a href="/zh/articles/document/">文档知识</a>
+      <a href="/zh/articles/process/">流程BPM</a>
+      <a href="/zh/articles/integration/">数据集成</a>
+      <a href="/zh/articles/security/">安全权限</a>
+      <a href="/zh/about.html">关于</a>
+      <a class="lang-switch" href="/articles/unified-enterprise-portal.html" hreflang="en">English</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap">
+<nav class="breadcrumb" aria-label="面包屑">
+  <ol>
+    <li><a href="/zh/">首页</a></li>
+    <li><a href="/zh/articles/portal/">门户与协同</a></li>
+    <li>构建统一企业信息门户</li>
+  </ol>
+</nav>
+</div>
+
+<div class="wrap layout">
+<aside class="sidebar">
+  <h3>内容栏目</h3>
+  <ul>
+    <li><a href="/zh/articles/portal/">门户与协同</a></li>
+    <li><a href="/zh/articles/master-data/">主数据管理</a></li>
+    <li><a href="/zh/articles/document/">文档与知识</a></li>
+    <li><a href="/zh/articles/process/">流程与 BPM</a></li>
+    <li><a href="/zh/articles/integration/">数据集成</a></li>
+    <li><a href="/zh/articles/security/">安全与权限</a></li>
+    <li><a href="/zh/articles/">全部文章</a></li>
+  </ul>
+  <h3>热门文章</h3>
+  <ul>
+    <li><a href="/zh/articles/unified-enterprise-portal.html">构建统一企业信息门户</a></li>
+    <li><a href="/zh/articles/master-data-governance.html">主数据治理：打造唯一事实源</a></li>
+    <li><a href="/zh/articles/document-knowledge-base.html">企业文档与知识库设计</a></li>
+  </ul>
+  <h3>关于</h3>
+  <ul>
+    <li><a href="/zh/about.html">关于本站</a></li>
+  </ul>
+</aside>
+
+<main class="content">
+  <article class="article">
+    <h1>构建统一企业信息门户</h1>
+    <p class="article-meta">发布时间：2026-10-04 | 分类：门户与协同</p>
+
+    <p>走进任何一家中型公司，数一数员工午饭前要碰多少系统：邮箱、ERP、CRM、人事自助、项目跟踪、BI 报表，外加至少三个"官方不存在"的表格。每个系统各有登录、各有菜单、各有提醒待办的方式。<strong>统一企业信息门户</strong>就是用单一入口替代这团噪音的前门——也是 IT 部门投入产出比最高的项目之一。</p>
+
+    <h2>为什么十个系统用起来像一百个</h2>
+
+    <p>痛点不在系统数量，而在重复。用户登录五次、学五套菜单、去五个地方找消息；IT 要接五个客服热线、执行五套密码策略、同一动作给新人培训五遍。每个孤立系统对"我是谁"还有自己的理解：员工调了部门，一个工具里等一周才有权限，另一个工具里却残留着过期权限。这笔成本在任何单项预算里都看不见，合计起来却实实在在地吃掉效率。</p>
+
+    <h2>门户到底是什么</h2>
+
+    <p>门户不是要新买一套系统，而是一层薄壳，只负责四件事：</p>
+
+    <ul>
+      <li><strong>单点登录。</strong>一套身份、一次登录、一个会话贯穿所有接入系统。光这一项就去掉了日常摩擦的大头。</li>
+      <li><strong>统一菜单。</strong>一棵导航树，由各系统菜单汇集而成，并按用户权限过滤——无论后端是谁，一个功能只出现在一个地方。</li>
+      <li><strong>消息中心。</strong>所有系统推送的任务、审批、提醒汇进一个收件箱，每条都深链回来源。审批不再藏在邮件里。</li>
+      <li><strong>统一搜索。</strong>一个搜索框覆盖跨系统的文档、主数据和业务记录，且每条结果都遵守权限。</li>
+    </ul>
+
+    <p>门户从不重写业务功能，只做框架。ERP 照旧开票，CRM 照旧跟单，门户只是让它们用起来像一个系统。</p>
+
+    <h2>不做大爆炸重写的整合路径</h2>
+
+    <p>务实的做法是一次只整合一层，先治最痛的：</p>
+
+    <ol>
+      <li><strong>先上 SSO。</strong>用标准协议（OIDC/SAML）把所有现有系统挂到统一身份提供方之后。用户立刻有感，其他一切照旧。</li>
+      <li><strong>再统一菜单。</strong>让每个系统通过一个小 API 或配置文件暴露自己的菜单和入口地址，门户负责渲染并按角色过滤。这里开始兑现<a href="/zh/articles/rbac-permission-model.html">扎实的 RBAC 模型</a>的价值。</li>
+      <li><strong>然后做消息中心。</strong>各系统把任务与提醒事件推到队列，门户渲染成统一收件箱。<a href="/zh/articles/bpmn-process-practice.html">流程引擎</a>里的审批在这里成为一等公民。</li>
+      <li><strong>搜索放最后。</strong>先索引文档和主数据（价值最大），再索引交易记录。索引必须落实行级权限，否则会泄露数据。</li>
+    </ol>
+
+    <h2>拖垮门户的几个坑</h2>
+
+    <ul>
+      <li><strong>重建而不是做框架。</strong>门户一旦重写业务逻辑，你就永远同时养两套系统。务必克制。</li>
+      <li><strong>菜单变陈旧。</strong>如果 ERP 里加了功能却不能自动同步到门户菜单，导航一个季度就腐烂。同步必须自动化。</li>
+      <li><strong>搜索不查权限。</strong>搜索结果里漏出一份不该看的文档，对门户信任的破坏超过任何功能缺失。</li>
+      <li><strong>当成纯 IT 项目。</strong>门户是公司的前门，需要像产品一样有负责人、有路线图、有预算科目。</li>
+    </ul>
+
+    <h2>结语</h2>
+
+    <p>统一门户的成功靠的是减法：更少的登录、更少的菜单、更少的收件箱、更少要去找的地方。先整合 SSO，给已有系统套上框架，让门户作为前门挣得自己的位置。入口统一之后，下一个难题是各系统互相打架的数据——这正是<a href="/zh/articles/master-data-governance.html">主数据治理</a>要解决的问题。</p>
+
+    <nav class="article-nav">
+      <span></span>
+      <a href="/zh/articles/master-data-governance.html">下一篇：主数据治理：打造唯一事实源 &rarr;</a>
+    </nav>
+  </article>
+</main>
+</div>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <h4>EIS-W.com</h4>
+        <p>企业信息系统技术站：门户、主数据、文档、流程、集成与安全。联系邮箱：<a href="mailto:webnic@qq.com">webnic@qq.com</a></p>
+      </div>
+      <div>
+        <h4>栏目导航</h4>
+        <ul>
+          <li><a href="/zh/articles/portal/">门户与协同</a></li>
+          <li><a href="/zh/articles/master-data/">主数据管理</a></li>
+          <li><a href="/zh/articles/document/">文档与知识</a></li>
+          <li><a href="/zh/articles/process/">流程与 BPM</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>相关站点</h4>
+        <ul>
+          <li><a href="https://jxc.js.cn" rel="noopener">jxc.js.cn · 进销存技术</a></li>
+          <li><a href="https://psi.js.cn" rel="noopener">psi.js.cn · PSI 进销存</a></li>
+          <li><a href="https://ims.js.cn" rel="noopener">ims.js.cn · 信息管理</a></li>
+          <li><a href="https://jxc-w.com" rel="noopener">jxc-w.com · 进销存 Web 版</a></li>
+          <li><a href="https://erp-w.com" rel="noopener">erp-w.com · ERP Web 版</a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="copyright">© 2026 eis-w.com · 企业信息系统技术站</p>
+  </div>
+</footer>
+
+</body>
+</html>

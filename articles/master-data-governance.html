@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Master Data Governance: One Version of the Truth - eis-w.com</title>
+<meta name="description" content="The governance rules that keep customer, supplier, item and org master data trustworthy: single write path, stewardship, quality metrics and distribution.">
+<link rel="canonical" href="https://eis-w.com/articles/master-data-governance.html">
+<link rel="alternate" hreflang="en" href="https://eis-w.com/articles/master-data-governance.html">
+<link rel="alternate" hreflang="zh-CN" href="https://eis-w.com/zh/articles/master-data-governance.html">
+<link rel="alternate" hreflang="x-default" href="https://eis-w.com/articles/master-data-governance.html">
+<meta property="og:title" content="Master Data Governance: One Version of the Truth - eis-w.com">
+<meta property="og:description" content="The governance rules that keep customer, supplier, item and org master data trustworthy: single write path, stewardship, quality metrics and distribution.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://eis-w.com/articles/master-data-governance.html">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary">
+<link rel="stylesheet" href="/css/style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Master Data Governance: One Version of the Truth",
+  "description": "The governance rules that keep customer, supplier, item and org master data trustworthy: single write path, stewardship, quality metrics and distribution.",
+  "datePublished": "2026-10-04",
+  "dateModified": "2026-10-04",
+  "author": { "@type": "Organization", "name": "eis-w.com" },
+  "mainEntityOfPage": "https://eis-w.com/articles/master-data-governance.html",
+  "inLanguage": "en"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://eis-w.com/" },
+    { "@type": "ListItem", "position": 2, "name": "Master Data", "item": "https://eis-w.com/articles/master-data/" },
+    { "@type": "ListItem", "position": 3, "name": "Master Data Governance: One Version of the Truth", "item": "https://eis-w.com/articles/master-data-governance.html" }
+  ]
+}
+</script>
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="logo" href="/">EIS-W<span>.com</span></a>
+    <input type="checkbox" id="nav-toggle" class="nav-toggle">
+    <label for="nav-toggle" class="nav-burger" aria-label="Open menu"><span></span></label>
+    <nav class="site-nav">
+      <a href="/">Home</a>
+      <a href="/articles/">Articles</a>
+      <a href="/articles/portal/">Portal</a>
+      <a href="/articles/master-data/">Master Data</a>
+      <a href="/articles/document/">Documents</a>
+      <a href="/articles/process/">Process</a>
+      <a href="/articles/integration/">Integration</a>
+      <a href="/articles/security/">Security</a>
+      <a href="/about.html">About</a>
+      <a class="lang-switch" href="/zh/articles/master-data-governance.html" hreflang="zh-CN">中文</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap">
+<nav class="breadcrumb" aria-label="Breadcrumb">
+  <ol>
+    <li><a href="/">Home</a></li>
+    <li><a href="/articles/master-data/">Master Data</a></li>
+    <li>Master Data Governance: One Version of the Truth</li>
+  </ol>
+</nav>
+</div>
+
+<div class="wrap layout">
+<aside class="sidebar">
+  <h3>Sections</h3>
+  <ul>
+    <li><a href="/articles/portal/">Portal & Collaboration</a></li>
+    <li><a href="/articles/master-data/">Master Data</a></li>
+    <li><a href="/articles/document/">Document & Knowledge</a></li>
+    <li><a href="/articles/process/">Process & BPM</a></li>
+    <li><a href="/articles/integration/">Data Integration</a></li>
+    <li><a href="/articles/security/">Security & Permissions</a></li>
+    <li><a href="/articles/">All Articles</a></li>
+  </ul>
+  <h3>Popular</h3>
+  <ul>
+    <li><a href="/articles/unified-enterprise-portal.html">Building a Unified Enterprise Portal</a></li>
+    <li><a href="/articles/master-data-governance.html">Master Data Governance: One Version of the Truth</a></li>
+    <li><a href="/articles/document-knowledge-base.html">Designing an Enterprise Document and Knowledge Base</a></li>
+  </ul>
+  <h3>About</h3>
+  <ul>
+    <li><a href="/about.html">About This Site</a></li>
+  </ul>
+</aside>
+
+<main class="content">
+  <article class="article">
+    <h1>Master Data Governance: One Version of the Truth</h1>
+    <p class="article-meta">Published: 2026-10-04 | Category: Master Data</p>
+
+    <p>Ask two departments for "the customer list" and you will get two different answers. One customer appears three times with slightly different names; a supplier has two codes; half the items have no unit of measure. This is the master data problem, and it quietly corrupts every report, price and delivery built on top. <strong>Master data governance</strong> is the discipline of keeping shared reference data correct, complete and unambiguous — one version of the truth that every system can trust.</p>
+
+    <h2>What counts as master data</h2>
+
+    <p>Master data is the relatively stable, widely shared core that transactions reference: customers, suppliers, items and materials, organizational units, employees, warehouses, chart of accounts. It changes slowly, is read by many systems, and gets copied everywhere. That combination — slow change, wide read, frequent copy — is exactly why it rots: nobody owns it, so everybody bends it.</p>
+
+    <h2>Rule 1: One write path</h2>
+
+    <p>The single most effective rule: each master entity has exactly one authoritative system and one create-and-modify path. Customer masters are created only in the CRM, items only in the ERP, org structure only in the HR system. Every other system receives copies, read-only. The moment a second system gains write access, divergence is guaranteed and reconciliation becomes a permanent tax. If the business truly needs two creation points, put a registration service in front that issues the canonical ID.</p>
+
+    <h2>Rule 2: A named steward per domain</h2>
+
+    <p>Technology cannot decide whether "ABC Ltd" and "ABC Limited" are the same company. Assign a human <strong>steward</strong> to each domain — customer, supplier, item, org — with the authority and the tooling to approve merges, reject duplicates and set naming standards. Stewardship is a part-time role for the person who actually uses the data daily, not a distant data-department function.</p>
+
+    <h2>Rule 3: Quality as measured metrics</h2>
+
+    <p>"Improve data quality" is unactionable; a dashboard is not. Pick a handful of dimensions and measure them monthly:</p>
+
+    <ul>
+      <li><strong>Completeness</strong> — what percent of customers have a tax ID, a real address, an assigned owner?</li>
+      <li><strong>Uniqueness</strong> — how many near-duplicates does the fuzzy matcher find per thousand records?</li>
+      <li><strong>Consistency</strong> — do the ERP, CRM and portal agree on the same attribute values for the same ID?</li>
+      <li><strong>Timeliness</strong> — how long does a correction take to reach every downstream copy?</li>
+    </ul>
+
+    <p>Post the numbers where the stewards see them. What gets measured gets budget.</p>
+
+    <h2>Rule 4: Governed distribution</h2>
+
+    <p>Copies are unavoidable, so make them flow through one governed channel: the owning system publishes change events or scheduled snapshots; downstream systems subscribe and never write back. Use <a href="/articles/data-integration-patterns.html">the integration pattern</a> that fits each consumer's latency need — events for milliseconds, batch for overnight. Every copy carries the canonical ID, so reconciliation is a join, not a detective story.</p>
+
+    <h2>The migration you cannot skip</h2>
+
+    <p>Governance written on top of a dirty master stays dirty. Budget an explicit migration phase before the rules go live: merge obvious duplicates, backfill the critical fields, retire codes that point at nothing. This cleanup is unglamorous and usually larger than expected, but it is the difference between governance that holds and governance that is quietly abandoned within a year.</p>
+
+    <p>The order matters less than the commitment: each rule only works because the others hold. A single write path with no steward becomes a bottleneck; metrics with no distribution channel become trivia; distribution with no quality gate becomes a well-organized copy of bad data.</p>
+
+    <h2>Conclusion</h2>
+
+    <p>Master data governance is not a one-time cleanup; it is a set of standing rules: one write path, a named steward, measured quality, governed distribution. Get those four right and every downstream report stops being a negotiation. And since portals, documents and workflows all consume master data, governance is also the quiet prerequisite for <a href="/articles/document-knowledge-base.html">a document and knowledge base</a> that can be trusted.</p>
+
+    <nav class="article-nav">
+      <a href="/articles/unified-enterprise-portal.html">&larr; Previous: Building a Unified Enterprise Portal</a>
+      <a href="/articles/document-knowledge-base.html">Next: Designing an Enterprise Document and Knowledge Base &rarr;</a>
+    </nav>
+  </article>
+</main>
+</div>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <h4>EIS-W.com</h4>
+        <p>Enterprise information system technology: portal, master data, documents, process, integration and security. Contact: <a href="mailto:webnic@qq.com">webnic@qq.com</a></p>
+      </div>
+      <div>
+        <h4>Sections</h4>
+        <ul>
+          <li><a href="/articles/portal/">Portal & Collaboration</a></li>
+          <li><a href="/articles/master-data/">Master Data</a></li>
+          <li><a href="/articles/document/">Document & Knowledge</a></li>
+          <li><a href="/articles/process/">Process & BPM</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Related Sites</h4>
+        <ul>
+          <li><a href="https://jxc.js.cn" rel="noopener">jxc.js.cn · Inventory Tech</a></li>
+          <li><a href="https://psi.js.cn" rel="noopener">psi.js.cn · PSI System</a></li>
+          <li><a href="https://ims.js.cn" rel="noopener">ims.js.cn · IMS Tech</a></li>
+          <li><a href="https://jxc-w.com" rel="noopener">jxc-w.com · Web Inventory</a></li>
+          <li><a href="https://erp-w.com" rel="noopener">erp-w.com · ERP Web</a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="copyright">© 2026 eis-w.com · Enterprise Information System Technology Hub</p>
+  </div>
+</footer>
+
+</body>
+</html>

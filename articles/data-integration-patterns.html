@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Data Integration Patterns for Enterprise Systems - eis-w.com</title>
+<meta name="description" content="ETL, APIs and events: choosing the right integration pattern per connection, with idempotency, retries, dead-letter queues and reconciliation done right.">
+<link rel="canonical" href="https://eis-w.com/articles/data-integration-patterns.html">
+<link rel="alternate" hreflang="en" href="https://eis-w.com/articles/data-integration-patterns.html">
+<link rel="alternate" hreflang="zh-CN" href="https://eis-w.com/zh/articles/data-integration-patterns.html">
+<link rel="alternate" hreflang="x-default" href="https://eis-w.com/articles/data-integration-patterns.html">
+<meta property="og:title" content="Data Integration Patterns for Enterprise Systems - eis-w.com">
+<meta property="og:description" content="ETL, APIs and events: choosing the right integration pattern per connection, with idempotency, retries, dead-letter queues and reconciliation done right.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://eis-w.com/articles/data-integration-patterns.html">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary">
+<link rel="stylesheet" href="/css/style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Data Integration Patterns for Enterprise Systems",
+  "description": "ETL, APIs and events: choosing the right integration pattern per connection, with idempotency, retries, dead-letter queues and reconciliation done right.",
+  "datePublished": "2026-10-04",
+  "dateModified": "2026-10-04",
+  "author": { "@type": "Organization", "name": "eis-w.com" },
+  "mainEntityOfPage": "https://eis-w.com/articles/data-integration-patterns.html",
+  "inLanguage": "en"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://eis-w.com/" },
+    { "@type": "ListItem", "position": 2, "name": "Data Integration", "item": "https://eis-w.com/articles/integration/" },
+    { "@type": "ListItem", "position": 3, "name": "Data Integration Patterns for Enterprise Systems", "item": "https://eis-w.com/articles/data-integration-patterns.html" }
+  ]
+}
+</script>
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="logo" href="/">EIS-W<span>.com</span></a>
+    <input type="checkbox" id="nav-toggle" class="nav-toggle">
+    <label for="nav-toggle" class="nav-burger" aria-label="Open menu"><span></span></label>
+    <nav class="site-nav">
+      <a href="/">Home</a>
+      <a href="/articles/">Articles</a>
+      <a href="/articles/portal/">Portal</a>
+      <a href="/articles/master-data/">Master Data</a>
+      <a href="/articles/document/">Documents</a>
+      <a href="/articles/process/">Process</a>
+      <a href="/articles/integration/">Integration</a>
+      <a href="/articles/security/">Security</a>
+      <a href="/about.html">About</a>
+      <a class="lang-switch" href="/zh/articles/data-integration-patterns.html" hreflang="zh-CN">中文</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap">
+<nav class="breadcrumb" aria-label="Breadcrumb">
+  <ol>
+    <li><a href="/">Home</a></li>
+    <li><a href="/articles/integration/">Data Integration</a></li>
+    <li>Data Integration Patterns for Enterprise Systems</li>
+  </ol>
+</nav>
+</div>
+
+<div class="wrap layout">
+<aside class="sidebar">
+  <h3>Sections</h3>
+  <ul>
+    <li><a href="/articles/portal/">Portal & Collaboration</a></li>
+    <li><a href="/articles/master-data/">Master Data</a></li>
+    <li><a href="/articles/document/">Document & Knowledge</a></li>
+    <li><a href="/articles/process/">Process & BPM</a></li>
+    <li><a href="/articles/integration/">Data Integration</a></li>
+    <li><a href="/articles/security/">Security & Permissions</a></li>
+    <li><a href="/articles/">All Articles</a></li>
+  </ul>
+  <h3>Popular</h3>
+  <ul>
+    <li><a href="/articles/unified-enterprise-portal.html">Building a Unified Enterprise Portal</a></li>
+    <li><a href="/articles/master-data-governance.html">Master Data Governance: One Version of the Truth</a></li>
+    <li><a href="/articles/document-knowledge-base.html">Designing an Enterprise Document and Knowledge Base</a></li>
+  </ul>
+  <h3>About</h3>
+  <ul>
+    <li><a href="/about.html">About This Site</a></li>
+  </ul>
+</aside>
+
+<main class="content">
+  <article class="article">
+    <h1>Data Integration Patterns for Enterprise Systems</h1>
+    <p class="article-meta">Published: 2026-10-04 | Category: Data Integration</p>
+
+    <p>The CRM does not know what the ERP shipped; the warehouse system does not know what the web store sold. Making systems talk is <strong>data integration</strong>, and the single biggest decision is the pattern you choose per connection. There is no universal best — only a best fit for each pair of systems, each latency requirement, each failure budget.</p>
+
+    <h2>The three fundamental patterns</h2>
+
+    <p>Every integration is a variation of three primitives. <strong>ETL (extract-transform-load)</strong> moves data in scheduled batches: a job pulls, reshapes and writes, nightly or hourly. <strong>API calls</strong> are synchronous request-response: one system asks another and waits. <strong>Events</strong> are asynchronous: a system publishes a fact, and interested systems react whenever they can. ETL is simplest but stale; APIs are immediate but couple caller to callee; events decouple but add infrastructure.</p>
+
+    <h2>Match the pattern to the need</h2>
+
+    <ul>
+      <li><strong>Reference data that changes daily</strong> — overnight ETL into the data warehouse. Fresh enough, trivially simple.</li>
+      <li><strong>"Does this customer exist?" during order entry</strong> — synchronous API call; the answer is needed before the user moves on.</li>
+      <li><strong>"An order was placed"</strong> — an event. Inventory, shipping and analytics all react, at their own pace, without the order system knowing who listens.</li>
+      <li><strong>A regulator's monthly report</strong> — batch ETL plus validation; nobody needs it faster, and correctness beats speed.</li>
+    </ul>
+
+    <p>Choosing is not a one-time architecture diagram. Different data in the same company legitimately uses different patterns.</p>
+
+    <h2>Idempotency is not optional</h2>
+
+    <p>Networks fail and messages redeliver. If processing "order created" twice creates two shipments, the integration will eventually corrupt data — not often, but always at the worst moment. Make every consumer <strong>idempotent</strong>: track processed message IDs, or design handlers so repeating the same event is a no-op ("set status to shipped", not "increment shipment count"). This one discipline eliminates the most feared class of integration bugs.</p>
+
+    <h2>Retries, dead letters and reconciliation</h2>
+
+    <p>Retry failed calls with exponential backoff and a cap — hammering a struggling system multiplies the outage. After the cap, park the message in a <strong>dead-letter queue</strong> with full context, and alert a human; silent loss is the unforgivable failure. Independently of all that, run periodic <strong>reconciliation</strong>: compare counts and checksums between source and target, and surface drift before users find it in a report.</p>
+
+    <h2>Events fit master data distribution</h2>
+
+    <p>Recall the <a href="/articles/master-data-governance.html">master data</a> rule that downstream systems hold read-only copies. Events are the natural carrier: the owning system publishes "customer changed", and every subscriber updates its copy within seconds. New systems join by subscribing — no schema exports, no point-to-point plumbing. The pattern that governs data and the pattern that moves it turn out to be the same decision.</p>
+
+    <h2>Own each connection end to end</h2>
+
+    <p>Integrations rot fastest at the seams — the handoff where "their system" becomes "your problem". Assign every connection a single owner with end-to-end responsibility: the runbook, the alerts, the reconciliation results and the vendor conversation. When a feed breaks at 2 a.m., the owner answers, not a round-robin of teams each pointing at the other. Shared-nothing ownership is how integrations silently fail for weeks while every team assumes someone else is watching.</p>
+
+    <p>Resist the urge to unify on one pattern for elegance. A company that declares events everywhere eventually discovers that a nightly batch, rebuilt in three days, would have served a dozen reports perfectly well. Fit the pattern to the data, and let different connections look different.</p>
+
+    <h2>Conclusion</h2>
+
+    <p>Pick ETL for tolerance, APIs for immediacy, events for decoupling — per connection, not per company. Then do the unglamorous work that decides whether any of it survives production: idempotent consumers, bounded retries, dead-letter queues and reconciliation. Reliable pipes finally make it possible to answer the hardest question of all — <a href="/articles/rbac-permission-model.html">who is allowed to see this data</a> — with confidence.</p>
+
+    <nav class="article-nav">
+      <a href="/articles/bpmn-process-practice.html">&larr; Previous: Enterprise Process Management with BPMN: Pragmatic Practice</a>
+      <a href="/articles/rbac-permission-model.html">Next: RBAC Permission Models for Enterprise Systems &rarr;</a>
+    </nav>
+  </article>
+</main>
+</div>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <h4>EIS-W.com</h4>
+        <p>Enterprise information system technology: portal, master data, documents, process, integration and security. Contact: <a href="mailto:webnic@qq.com">webnic@qq.com</a></p>
+      </div>
+      <div>
+        <h4>Sections</h4>
+        <ul>
+          <li><a href="/articles/portal/">Portal & Collaboration</a></li>
+          <li><a href="/articles/master-data/">Master Data</a></li>
+          <li><a href="/articles/document/">Document & Knowledge</a></li>
+          <li><a href="/articles/process/">Process & BPM</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Related Sites</h4>
+        <ul>
+          <li><a href="https://jxc.js.cn" rel="noopener">jxc.js.cn · Inventory Tech</a></li>
+          <li><a href="https://psi.js.cn" rel="noopener">psi.js.cn · PSI System</a></li>
+          <li><a href="https://ims.js.cn" rel="noopener">ims.js.cn · IMS Tech</a></li>
+          <li><a href="https://jxc-w.com" rel="noopener">jxc-w.com · Web Inventory</a></li>
+          <li><a href="https://erp-w.com" rel="noopener">erp-w.com · ERP Web</a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="copyright">© 2026 eis-w.com · Enterprise Information System Technology Hub</p>
+  </div>
+</footer>
+
+</body>
+</html>

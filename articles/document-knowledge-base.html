@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Designing an Enterprise Document and Knowledge Base - eis-w.com</title>
+<meta name="description" content="From file servers to searchable knowledge: folder taxonomy versus metadata, versioning, permissions, full-text search and the knowledge layer on top.">
+<link rel="canonical" href="https://eis-w.com/articles/document-knowledge-base.html">
+<link rel="alternate" hreflang="en" href="https://eis-w.com/articles/document-knowledge-base.html">
+<link rel="alternate" hreflang="zh-CN" href="https://eis-w.com/zh/articles/document-knowledge-base.html">
+<link rel="alternate" hreflang="x-default" href="https://eis-w.com/articles/document-knowledge-base.html">
+<meta property="og:title" content="Designing an Enterprise Document and Knowledge Base - eis-w.com">
+<meta property="og:description" content="From file servers to searchable knowledge: folder taxonomy versus metadata, versioning, permissions, full-text search and the knowledge layer on top.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://eis-w.com/articles/document-knowledge-base.html">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary">
+<link rel="stylesheet" href="/css/style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Designing an Enterprise Document and Knowledge Base",
+  "description": "From file servers to searchable knowledge: folder taxonomy versus metadata, versioning, permissions, full-text search and the knowledge layer on top.",
+  "datePublished": "2026-10-04",
+  "dateModified": "2026-10-04",
+  "author": { "@type": "Organization", "name": "eis-w.com" },
+  "mainEntityOfPage": "https://eis-w.com/articles/document-knowledge-base.html",
+  "inLanguage": "en"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://eis-w.com/" },
+    { "@type": "ListItem", "position": 2, "name": "Document & Knowledge", "item": "https://eis-w.com/articles/document/" },
+    { "@type": "ListItem", "position": 3, "name": "Designing an Enterprise Document and Knowledge Base", "item": "https://eis-w.com/articles/document-knowledge-base.html" }
+  ]
+}
+</script>
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="logo" href="/">EIS-W<span>.com</span></a>
+    <input type="checkbox" id="nav-toggle" class="nav-toggle">
+    <label for="nav-toggle" class="nav-burger" aria-label="Open menu"><span></span></label>
+    <nav class="site-nav">
+      <a href="/">Home</a>
+      <a href="/articles/">Articles</a>
+      <a href="/articles/portal/">Portal</a>
+      <a href="/articles/master-data/">Master Data</a>
+      <a href="/articles/document/">Documents</a>
+      <a href="/articles/process/">Process</a>
+      <a href="/articles/integration/">Integration</a>
+      <a href="/articles/security/">Security</a>
+      <a href="/about.html">About</a>
+      <a class="lang-switch" href="/zh/articles/document-knowledge-base.html" hreflang="zh-CN">中文</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap">
+<nav class="breadcrumb" aria-label="Breadcrumb">
+  <ol>
+    <li><a href="/">Home</a></li>
+    <li><a href="/articles/document/">Document & Knowledge</a></li>
+    <li>Designing an Enterprise Document and Knowledge Base</li>
+  </ol>
+</nav>
+</div>
+
+<div class="wrap layout">
+<aside class="sidebar">
+  <h3>Sections</h3>
+  <ul>
+    <li><a href="/articles/portal/">Portal & Collaboration</a></li>
+    <li><a href="/articles/master-data/">Master Data</a></li>
+    <li><a href="/articles/document/">Document & Knowledge</a></li>
+    <li><a href="/articles/process/">Process & BPM</a></li>
+    <li><a href="/articles/integration/">Data Integration</a></li>
+    <li><a href="/articles/security/">Security & Permissions</a></li>
+    <li><a href="/articles/">All Articles</a></li>
+  </ul>
+  <h3>Popular</h3>
+  <ul>
+    <li><a href="/articles/unified-enterprise-portal.html">Building a Unified Enterprise Portal</a></li>
+    <li><a href="/articles/master-data-governance.html">Master Data Governance: One Version of the Truth</a></li>
+    <li><a href="/articles/document-knowledge-base.html">Designing an Enterprise Document and Knowledge Base</a></li>
+  </ul>
+  <h3>About</h3>
+  <ul>
+    <li><a href="/about.html">About This Site</a></li>
+  </ul>
+</aside>
+
+<main class="content">
+  <article class="article">
+    <h1>Designing an Enterprise Document and Knowledge Base</h1>
+    <p class="article-meta">Published: 2026-10-04 | Category: Document & Knowledge</p>
+
+    <p>Every company has a shared drive. Most are graveyards: folders nested twelve levels deep, files named "report-final-REAL-v3.docx", and the one person who knows where anything lives — until they leave. The step from a file server to a real <strong>document and knowledge base</strong> is not buying storage; it is changing how documents are organized, found and trusted.</p>
+
+    <h2>Folders pretend to be organization</h2>
+
+    <p>A folder tree forces every document into exactly one location, but documents naturally belong to many: a contract belongs to the customer, the project and the legal category at once. Users resolve this by copying, and copies drift. The fix is <strong>metadata over folders</strong>: store files flat, tag them with type, customer, project, department and status, and let views be queries. "All contracts of customer X signed this year" becomes a filter, not a scavenger hunt.</p>
+
+    <h2>Versioning people will actually use</h2>
+
+    <p>Version control fails when it demands discipline users do not have. Keep it automatic and honest: every save creates a version; the current version is the one everyone sees; previous versions are one click away, never edited in place. Name major milestones explicitly ("v1.0 submitted", "v2.0 signed") so the business meaning survives. Lock files only for binary formats that cannot be merged — for everything else, trust the version history.</p>
+
+    <h2>Permissions follow the metadata</h2>
+
+    <p>In a folder world, access is inherited by location, so a sensitive file dropped in the wrong folder is exposed. With metadata, permissions become explicit rules on tags: contracts are visible to legal and the owning department, payroll to HR only. Compute access at read time from the tags, audit the rules centrally, and one forgotten move no longer leaks a file. This is the same model that <a href="/articles/rbac-permission-model.html">RBAC permissions</a> use, applied to documents.</p>
+
+    <h2>Search is the real interface</h2>
+
+    <p>Nobody browses anymore; they search. Full-text indexing across PDFs, office documents and even scanned images (via OCR) turns the repository into an answer machine. Tune ranking to prefer recent, authoritative and heavily-linked documents. Every search result must respect the metadata permissions — search that leaks a title it cannot open is a security bug, not a feature.</p>
+
+    <h2>The knowledge layer on top</h2>
+
+    <p>Documents record what happened; knowledge captures what was learned. Add a curated layer: FAQs, how-to guides, decision records and onboarding paths, each with an owner and a review date. A wiki that lets anyone edit anything rots into contradictions; a knowledge base where every page has an accountable owner stays true. Connect the layers — a how-to guide links to the exact template it describes — so the curated knowledge and the raw documents reinforce each other.</p>
+
+    <h2>Adoption is a feature</h2>
+
+    <p>The best-designed repository fails if people keep emailing attachments out of habit. Plan adoption like a feature launch: import the most-used folders first so search immediately beats browsing, name a visible champion in each department, and make "email me the file" socially obsolete by making the share link faster than the attachment. Usage metrics — searches per week, share-link creates, uploads by department — tell you whether the system is winning.</p>
+
+    <p>One rule of thumb settles most design arguments: optimize for the reader who arrives six months from now with a question, not for the author filing today. Nearly every choice — naming, metadata fields, review dates — follows from that single preference.</p>
+
+    <h2>Conclusion</h2>
+
+    <p>A document system earns trust through metadata, honest versioning, tag-based permissions and search that respects them. Add an owned, reviewed knowledge layer and the company stops re-answering the same questions. The same content often moves through approvals before it lands here — the pipeline that governs that is <a href="/articles/bpmn-process-practice.html">business process management with BPMN</a>.</p>
+
+    <nav class="article-nav">
+      <a href="/articles/master-data-governance.html">&larr; Previous: Master Data Governance: One Version of the Truth</a>
+      <a href="/articles/bpmn-process-practice.html">Next: Enterprise Process Management with BPMN: Pragmatic Practice &rarr;</a>
+    </nav>
+  </article>
+</main>
+</div>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <h4>EIS-W.com</h4>
+        <p>Enterprise information system technology: portal, master data, documents, process, integration and security. Contact: <a href="mailto:webnic@qq.com">webnic@qq.com</a></p>
+      </div>
+      <div>
+        <h4>Sections</h4>
+        <ul>
+          <li><a href="/articles/portal/">Portal & Collaboration</a></li>
+          <li><a href="/articles/master-data/">Master Data</a></li>
+          <li><a href="/articles/document/">Document & Knowledge</a></li>
+          <li><a href="/articles/process/">Process & BPM</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Related Sites</h4>
+        <ul>
+          <li><a href="https://jxc.js.cn" rel="noopener">jxc.js.cn · Inventory Tech</a></li>
+          <li><a href="https://psi.js.cn" rel="noopener">psi.js.cn · PSI System</a></li>
+          <li><a href="https://ims.js.cn" rel="noopener">ims.js.cn · IMS Tech</a></li>
+          <li><a href="https://jxc-w.com" rel="noopener">jxc-w.com · Web Inventory</a></li>
+          <li><a href="https://erp-w.com" rel="noopener">erp-w.com · ERP Web</a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="copyright">© 2026 eis-w.com · Enterprise Information System Technology Hub</p>
+  </div>
+</footer>
+
+</body>
+</html>

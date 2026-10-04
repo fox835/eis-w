@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RBAC Permission Models for Enterprise Systems - eis-w.com</title>
+<meta name="description" content="Designing RBAC that survives real organizational complexity: user-role-permission, role explosion, the fourth data-scope dimension and enforcement in every layer.">
+<link rel="canonical" href="https://eis-w.com/articles/rbac-permission-model.html">
+<link rel="alternate" hreflang="en" href="https://eis-w.com/articles/rbac-permission-model.html">
+<link rel="alternate" hreflang="zh-CN" href="https://eis-w.com/zh/articles/rbac-permission-model.html">
+<link rel="alternate" hreflang="x-default" href="https://eis-w.com/articles/rbac-permission-model.html">
+<meta property="og:title" content="RBAC Permission Models for Enterprise Systems - eis-w.com">
+<meta property="og:description" content="Designing RBAC that survives real organizational complexity: user-role-permission, role explosion, the fourth data-scope dimension and enforcement in every layer.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://eis-w.com/articles/rbac-permission-model.html">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary">
+<link rel="stylesheet" href="/css/style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "RBAC Permission Models for Enterprise Systems",
+  "description": "Designing RBAC that survives real organizational complexity: user-role-permission, role explosion, the fourth data-scope dimension and enforcement in every layer.",
+  "datePublished": "2026-10-04",
+  "dateModified": "2026-10-04",
+  "author": { "@type": "Organization", "name": "eis-w.com" },
+  "mainEntityOfPage": "https://eis-w.com/articles/rbac-permission-model.html",
+  "inLanguage": "en"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://eis-w.com/" },
+    { "@type": "ListItem", "position": 2, "name": "Security & Permissions", "item": "https://eis-w.com/articles/security/" },
+    { "@type": "ListItem", "position": 3, "name": "RBAC Permission Models for Enterprise Systems", "item": "https://eis-w.com/articles/rbac-permission-model.html" }
+  ]
+}
+</script>
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="logo" href="/">EIS-W<span>.com</span></a>
+    <input type="checkbox" id="nav-toggle" class="nav-toggle">
+    <label for="nav-toggle" class="nav-burger" aria-label="Open menu"><span></span></label>
+    <nav class="site-nav">
+      <a href="/">Home</a>
+      <a href="/articles/">Articles</a>
+      <a href="/articles/portal/">Portal</a>
+      <a href="/articles/master-data/">Master Data</a>
+      <a href="/articles/document/">Documents</a>
+      <a href="/articles/process/">Process</a>
+      <a href="/articles/integration/">Integration</a>
+      <a href="/articles/security/">Security</a>
+      <a href="/about.html">About</a>
+      <a class="lang-switch" href="/zh/articles/rbac-permission-model.html" hreflang="zh-CN">中文</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap">
+<nav class="breadcrumb" aria-label="Breadcrumb">
+  <ol>
+    <li><a href="/">Home</a></li>
+    <li><a href="/articles/security/">Security & Permissions</a></li>
+    <li>RBAC Permission Models for Enterprise Systems</li>
+  </ol>
+</nav>
+</div>
+
+<div class="wrap layout">
+<aside class="sidebar">
+  <h3>Sections</h3>
+  <ul>
+    <li><a href="/articles/portal/">Portal & Collaboration</a></li>
+    <li><a href="/articles/master-data/">Master Data</a></li>
+    <li><a href="/articles/document/">Document & Knowledge</a></li>
+    <li><a href="/articles/process/">Process & BPM</a></li>
+    <li><a href="/articles/integration/">Data Integration</a></li>
+    <li><a href="/articles/security/">Security & Permissions</a></li>
+    <li><a href="/articles/">All Articles</a></li>
+  </ul>
+  <h3>Popular</h3>
+  <ul>
+    <li><a href="/articles/unified-enterprise-portal.html">Building a Unified Enterprise Portal</a></li>
+    <li><a href="/articles/master-data-governance.html">Master Data Governance: One Version of the Truth</a></li>
+    <li><a href="/articles/document-knowledge-base.html">Designing an Enterprise Document and Knowledge Base</a></li>
+  </ul>
+  <h3>About</h3>
+  <ul>
+    <li><a href="/about.html">About This Site</a></li>
+  </ul>
+</aside>
+
+<main class="content">
+  <article class="article">
+    <h1>RBAC Permission Models for Enterprise Systems</h1>
+    <p class="article-meta">Published: 2026-10-04 | Category: Security & Permissions</p>
+
+    <p>"Who can see the salary column?" In a mature system the answer is a report, not a meeting. <strong>Role-Based Access Control (RBAC)</strong> — grouping users into roles and granting permissions to roles — is the standard answer, and it works beautifully until the org chart grows teeth. This article covers the classic model and the three places it typically breaks in real enterprises.</p>
+
+    <h2>The classic model, done right</h2>
+
+    <p>RBAC has three tiers: users get <strong>roles</strong>; roles carry <strong>permissions</strong>; permissions name <strong>actions on resources</strong> — "read", "approve", "delete" on "sales-order", "salary-report". Two rules keep it clean: permissions are never granted to users directly, only through roles; and permissions are fine-grained ("approve sales-order") rather than page-level ("access the orders screen"), so one role composes many permissions without a new role per page. A user gets exactly the union of their roles' permissions — no manual overrides, ever.</p>
+
+    <h2>Break 1: role explosion</h2>
+
+    <p>"Sales manager east", "sales manager west", "junior sales manager east on probation" — the org keeps inventing roles faster than IT can model them. The fix is <strong>hierarchy with constraints</strong>: a small set of base roles (sales rep, manager), combined with a <strong>data scope</strong> (east, west) rather than baked into the role name, plus <strong>mutual-exclusion rules</strong> (the same user cannot hold both "applicant" and "approver" for the same flow). Three mechanisms replace hundreds of near-duplicate roles.</p>
+
+    <h2>Break 2: data scope is the forgotten dimension</h2>
+
+    <p>"Sales manager" implies a function, but which rows? A manager sees only their region's orders; HR sees salaries of their department. This is <strong>data scope</strong>, and it fails in one of two ways: it is hard-coded per query (fragile, inconsistent), or it lives only in the UI (trivially bypassed by calling the API directly). The correct place is a single scope filter applied in the data access layer, derived from the user's role attributes, tested like security code — because it is.</p>
+
+    <h2>Break 3: enforcement that lives in the wrong layer</h2>
+
+    <p>Hiding a button is not security. Every layer must enforce:</p>
+
+    <ul>
+      <li><strong>UI</strong> — hide what the user cannot do (good UX, zero security)</li>
+      <li><strong>API gateway</strong> — reject unauthenticated and unauthorized calls</li>
+      <li><strong>Service layer</strong> — verify the permission for the specific action</li>
+      <li><strong>Data layer</strong> — apply the data-scope filter on every query</li>
+    </ul>
+
+    <p>If any layer is missing, the layers above it are decoration. The <a href="/articles/unified-enterprise-portal.html">unified portal</a> renders menus from the same role model, so what a user sees is exactly what they can do.</p>
+
+    <h2>Audit and periodic review</h2>
+
+    <p>A permission model without review rots silently. Log every grant, every role change and every denied-and-retried access pattern. Review role assignments quarterly — people accumulate roles like lint, and the "temporary" access from two projects ago is still there. Tie role changes to HR events: when someone transfers departments, their old roles should end automatically, not whenever someone remembers.</p>
+
+    <h2>Deny by default, document by exception</h2>
+
+    <p>The default answer to a new permission request should be no, with a written business reason required to flip it. Exception grants expire: give every one-off access an end date, and let the system remove it automatically. Over years this single habit — deny by default, exceptions expire — does more for least-privilege than any policy document, because it converts access growth from an accumulation into a deliberate, reviewable decision.</p>
+
+    <h2>Conclusion</h2>
+
+    <p>RBAC survives enterprise reality when you keep permissions fine-grained, model data scope as a first-class dimension, enforce at every layer and review on a schedule. Security that is a report instead of a meeting is not less human — it is the only kind that scales. With identity and permissions settled, the systems that consume them — portal, documents, workflows — all inherit the same guarantees.</p>
+
+    <nav class="article-nav">
+      <a href="/articles/data-integration-patterns.html">&larr; Previous: Data Integration Patterns for Enterprise Systems</a>
+      <span></span>
+    </nav>
+  </article>
+</main>
+</div>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <h4>EIS-W.com</h4>
+        <p>Enterprise information system technology: portal, master data, documents, process, integration and security. Contact: <a href="mailto:webnic@qq.com">webnic@qq.com</a></p>
+      </div>
+      <div>
+        <h4>Sections</h4>
+        <ul>
+          <li><a href="/articles/portal/">Portal & Collaboration</a></li>
+          <li><a href="/articles/master-data/">Master Data</a></li>
+          <li><a href="/articles/document/">Document & Knowledge</a></li>
+          <li><a href="/articles/process/">Process & BPM</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Related Sites</h4>
+        <ul>
+          <li><a href="https://jxc.js.cn" rel="noopener">jxc.js.cn · Inventory Tech</a></li>
+          <li><a href="https://psi.js.cn" rel="noopener">psi.js.cn · PSI System</a></li>
+          <li><a href="https://ims.js.cn" rel="noopener">ims.js.cn · IMS Tech</a></li>
+          <li><a href="https://jxc-w.com" rel="noopener">jxc-w.com · Web Inventory</a></li>
+          <li><a href="https://erp-w.com" rel="noopener">erp-w.com · ERP Web</a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="copyright">© 2026 eis-w.com · Enterprise Information System Technology Hub</p>
+  </div>
+</footer>
+
+</body>
+</html>

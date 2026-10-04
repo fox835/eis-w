@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>企业系统数据集成模式 - eis-w.com</title>
+<meta name="description" content="ETL、API 与事件：为每条连接选择合适的集成模式，并把幂等、重试、死信队列与对账做对。">
+<link rel="canonical" href="https://eis-w.com/zh/articles/data-integration-patterns.html">
+<link rel="alternate" hreflang="en" href="https://eis-w.com/articles/data-integration-patterns.html">
+<link rel="alternate" hreflang="zh-CN" href="https://eis-w.com/zh/articles/data-integration-patterns.html">
+<link rel="alternate" hreflang="x-default" href="https://eis-w.com/articles/data-integration-patterns.html">
+<meta property="og:title" content="企业系统数据集成模式 - eis-w.com">
+<meta property="og:description" content="ETL、API 与事件：为每条连接选择合适的集成模式，并把幂等、重试、死信队列与对账做对。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://eis-w.com/zh/articles/data-integration-patterns.html">
+<meta property="og:locale" content="zh_CN">
+<meta name="twitter:card" content="summary">
+<link rel="stylesheet" href="/css/style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "企业系统数据集成模式",
+  "description": "ETL、API 与事件：为每条连接选择合适的集成模式，并把幂等、重试、死信队列与对账做对。",
+  "datePublished": "2026-10-04",
+  "dateModified": "2026-10-04",
+  "author": { "@type": "Organization", "name": "eis-w.com" },
+  "mainEntityOfPage": "https://eis-w.com/zh/articles/data-integration-patterns.html",
+  "inLanguage": "zh-CN"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "首页", "item": "https://eis-w.com/zh/" },
+    { "@type": "ListItem", "position": 2, "name": "数据集成", "item": "https://eis-w.com/zh/articles/integration/" },
+    { "@type": "ListItem", "position": 3, "name": "企业系统数据集成模式", "item": "https://eis-w.com/zh/articles/data-integration-patterns.html" }
+  ]
+}
+</script>
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="logo" href="/zh/">EIS-W<span>.com</span></a>
+    <input type="checkbox" id="nav-toggle" class="nav-toggle">
+    <label for="nav-toggle" class="nav-burger" aria-label="打开菜单"><span></span></label>
+    <nav class="site-nav">
+      <a href="/zh/">首页</a>
+      <a href="/zh/articles/">全部文章</a>
+      <a href="/zh/articles/portal/">门户协同</a>
+      <a href="/zh/articles/master-data/">主数据</a>
+      <a href="/zh/articles/document/">文档知识</a>
+      <a href="/zh/articles/process/">流程BPM</a>
+      <a href="/zh/articles/integration/">数据集成</a>
+      <a href="/zh/articles/security/">安全权限</a>
+      <a href="/zh/about.html">关于</a>
+      <a class="lang-switch" href="/articles/data-integration-patterns.html" hreflang="en">English</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap">
+<nav class="breadcrumb" aria-label="面包屑">
+  <ol>
+    <li><a href="/zh/">首页</a></li>
+    <li><a href="/zh/articles/integration/">数据集成</a></li>
+    <li>企业系统数据集成模式</li>
+  </ol>
+</nav>
+</div>
+
+<div class="wrap layout">
+<aside class="sidebar">
+  <h3>内容栏目</h3>
+  <ul>
+    <li><a href="/zh/articles/portal/">门户与协同</a></li>
+    <li><a href="/zh/articles/master-data/">主数据管理</a></li>
+    <li><a href="/zh/articles/document/">文档与知识</a></li>
+    <li><a href="/zh/articles/process/">流程与 BPM</a></li>
+    <li><a href="/zh/articles/integration/">数据集成</a></li>
+    <li><a href="/zh/articles/security/">安全与权限</a></li>
+    <li><a href="/zh/articles/">全部文章</a></li>
+  </ul>
+  <h3>热门文章</h3>
+  <ul>
+    <li><a href="/zh/articles/unified-enterprise-portal.html">构建统一企业信息门户</a></li>
+    <li><a href="/zh/articles/master-data-governance.html">主数据治理：打造唯一事实源</a></li>
+    <li><a href="/zh/articles/document-knowledge-base.html">企业文档与知识库设计</a></li>
+  </ul>
+  <h3>关于</h3>
+  <ul>
+    <li><a href="/zh/about.html">关于本站</a></li>
+  </ul>
+</aside>
+
+<main class="content">
+  <article class="article">
+    <h1>企业系统数据集成模式</h1>
+    <p class="article-meta">发布时间：2026-10-04 | 分类：数据集成</p>
+
+    <p>CRM 不知道 ERP 发了什么货，仓储系统不知道网店卖掉了什么。让系统对话就是<strong>数据集成</strong>，而其中最大的单一决策，是为每条连接选择什么模式。没有普适的最优——只有对每对系统、每个时效要求、每个故障预算而言的最合适。</p>
+
+    <h2>三种基本模式</h2>
+
+    <p>所有集成都是三个原型的变体。<strong>ETL（抽取-转换-加载）</strong>按调度批量搬数据：任务拉取、重塑、写入，隔夜或每小时一次。<strong>API 调用</strong>是同步的请求-响应：一个系统问另一个系统并等待。<strong>事件</strong>是异步的：一个系统发布一个事实，感兴趣的系统各自择机反应。ETL 最简单但数据陈旧；API 即时但调用方与被调方耦合；事件解耦但增加基础设施。</p>
+
+    <h2>按需求配模式</h2>
+
+    <ul>
+      <li><strong>每天变化的参考数据</strong>——隔夜 ETL 进数据仓库。够新鲜，也最简单。</li>
+      <li><strong>录单时要确认"客户存在吗"</strong>——同步 API 调用；用户继续操作前必须拿到答案。</li>
+      <li><strong>"一张订单已下单"</strong>——用事件。库存、发货、分析各自反应，各按各的节奏，下单系统无需知道谁在听。</li>
+      <li><strong>给监管机构的月报</strong>——批量 ETL 加校验；没人需要它更快，正确性胜过速度。</li>
+    </ul>
+
+    <p>选型不是一次性的架构图。同一家公司的不同数据，合理地使用不同模式。</p>
+
+    <h2>幂等不是可选项</h2>
+
+    <p>网络会故障，消息会重复投递。若处理两次"订单已创建"就产生两次发货，集成迟早弄脏数据——不常发生，但总在最坏的时刻。让每个消费方<strong>幂等</strong>：记录已处理的消息 ID，或把处理器设计成重复同一事件是无操作（"置为已发货"，而非"发货数加一"）。这一条纪律消除了最令人畏惧的一类集成缺陷。</p>
+
+    <h2>重试、死信与对账</h2>
+
+    <p>失败的调用按指数退避加上限重试——猛打一个正在挣扎的系统只会放大故障。超限后把消息连同完整上下文停进<strong>死信队列</strong>并告警人工；静默丢失是不可原谅的失败。独立于这一切，定期跑<strong>对账</strong>：比对源端与目标端的记录数和校验和，在用户从报表里发现之前先暴露漂移。</p>
+
+    <h2>事件契合主数据分发</h2>
+
+    <p>回想<a href="/zh/articles/master-data-governance.html">主数据</a>的规则：下游系统持有只读副本。事件是天然的载体：属主系统发布"客户已变更"，每个订阅方几秒内更新自己的副本。新系统加入只需订阅——不用导出表结构，不用点对点布线。治理数据的模式和搬运数据的模式，到头来是同一个决定。</p>
+
+    <h2>每条连接端到端有主</h2>
+
+    <p>集成腐烂最快的地方是接缝——"他们的系统"变成"你的问题"的那个交接点。给每条连接指定唯一负责人，端到端负责：运行手册、告警、对账结果、与厂商的沟通。凌晨两点 feed 断了，是负责人接听，而不是几个团队互相推诿。没有明确归属，集成会悄无声息地坏上几周，每个团队都以为另有人在看。</p>
+
+    <p>别为了优雅而统一成一种模式。宣布全靠事件的公司迟早发现：一个三天就能重建的夜间批处理，本可以完美服务好十几份报表。让模式贴合数据，不同的连接本就该长得不一样。</p>
+
+    <h2>结语</h2>
+
+    <p>要容忍度用 ETL，要即时性用 API，要解耦用事件——按连接选型，而非按公司选型。然后做那些决定一切能否活到生产的平凡工作：幂等消费、有界重试、死信队列与对账。管道可靠之后，才有可能自信地回答最难的那个问题——<a href="/zh/articles/rbac-permission-model.html">谁被允许看到这份数据</a>。</p>
+
+    <nav class="article-nav">
+      <a href="/zh/articles/bpmn-process-practice.html">&larr; 上一篇：企业流程管理 BPMN 务实实践</a>
+      <a href="/zh/articles/rbac-permission-model.html">下一篇：企业系统 RBAC 权限模型 &rarr;</a>
+    </nav>
+  </article>
+</main>
+</div>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <h4>EIS-W.com</h4>
+        <p>企业信息系统技术站：门户、主数据、文档、流程、集成与安全。联系邮箱：<a href="mailto:webnic@qq.com">webnic@qq.com</a></p>
+      </div>
+      <div>
+        <h4>栏目导航</h4>
+        <ul>
+          <li><a href="/zh/articles/portal/">门户与协同</a></li>
+          <li><a href="/zh/articles/master-data/">主数据管理</a></li>
+          <li><a href="/zh/articles/document/">文档与知识</a></li>
+          <li><a href="/zh/articles/process/">流程与 BPM</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>相关站点</h4>
+        <ul>
+          <li><a href="https://jxc.js.cn" rel="noopener">jxc.js.cn · 进销存技术</a></li>
+          <li><a href="https://psi.js.cn" rel="noopener">psi.js.cn · PSI 进销存</a></li>
+          <li><a href="https://ims.js.cn" rel="noopener">ims.js.cn · 信息管理</a></li>
+          <li><a href="https://jxc-w.com" rel="noopener">jxc-w.com · 进销存 Web 版</a></li>
+          <li><a href="https://erp-w.com" rel="noopener">erp-w.com · ERP Web 版</a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="copyright">© 2026 eis-w.com · 企业信息系统技术站</p>
+  </div>
+</footer>
+
+</body>
+</html>
